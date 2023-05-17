@@ -166,7 +166,6 @@ const updateOrder = asyncHandler(async (req, res) => {
         shippingDetails: session.shipping_details,
         status: "paid",
         paymentIntentId: session.payment_intent,
-        deliveryStatus: 'on it\'s way',
       },
       { new: true }
     );

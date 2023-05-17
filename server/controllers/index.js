@@ -4,7 +4,6 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
-  updateProductViewCount
 } = require("./products.controller");
 const { register,
     login,
@@ -18,8 +17,6 @@ const {
   updateUserPassword,
   updateUser,
   showCurrentUser,
-  updateViewedProducts,
-  updateWishlist
 } = require("./user.controller");
 
 const {
@@ -44,7 +41,6 @@ module.exports = {
   getSingleProduct,
   createProduct,
   updateProduct,
-  updateProductViewCount,
   deleteProduct,
   register,
   login,
@@ -68,6 +64,4 @@ module.exports = {
   getSingleOrder,
   updateOrder,
   getCurrentUserOrders,
-  updateViewedProducts,
-  updateWishlist,
 };

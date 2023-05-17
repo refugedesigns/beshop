@@ -92,23 +92,6 @@ const validateUpdateProduct = [
   },
 ];
 
-const validateUpdateProductViewCount = [
-  body("productId").isMongoId(),
-  (req, res, next) => {
-    validationResult(req).throw();
-    next();
-  },
-];
-
-const validateUpdateViewedProducts = [
-  body("viewedProducts.*").isMongoId(),
-  (req, res, next) => {
-    console.log(req.body)
-    validationResult(req).throw();
-    next()
-  }
-]
-
 const validateParams = [
   param("id").isMongoId(),
   (req, res, next) => {
@@ -178,8 +161,6 @@ const validateCreateOrder = [
 module.exports = {
     validateCreateProduct,
     validateUpdateProduct,
-    validateUpdateProductViewCount,
-    validateUpdateViewedProducts,
     validateParams,
     validateCreateUser,
     validateLoginUser,

@@ -70,11 +70,6 @@ const orderSchema = new Schema(
     paymentIntentId: {
       type: String,
     },
-    deliveryStatus: {
-      type: String,
-      enum: ['delivered', 'on it\'s way', 'on hold'],
-      default: 'on hold'
-    },
     shippingDetails: {
       address: {
         city: String,

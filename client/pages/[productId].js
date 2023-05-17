@@ -33,17 +33,15 @@ const ProdudctDetailPage = ({ product }) => {
 export async function getStaticProps(context) {
   const { params } = context;
 
-  let product
-  try {
-    const response = await fetch(
-      `http://localhost:8000/api/v1/products/${params.productId}`
-    );
-    product = await response.json();
-  } catch (error) {
-      return {
-        notFound: true,
-      };
-    
+  const response = await fetch(
+    `http://localhost:8000/api/v1/products/${params.productId}`
+  );
+  const product = await response.json();
+    console.log(product)
+  if (product.msg === "Invalid value for field: id") {
+    return {
+      notFound: true,
+    };
   }
 
   return {
@@ -54,21 +52,13 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  let params
-  try { 
-    const response = await fetch(
-      "http:localhost:8000/api/v1/products?filterItems=makeup&limit=20"
-    );
-    const products = await response.json();
-  
-    const ids = products.products.map((product) => product._id);
-    params = ids.map((id) => ({ params: { productId: id.toString() } }));
-  } catch (error) {
-    return {
-      paths: [],
-      fallback: 'blocking'
-    }
-  }
+  const response = await fetch(
+    "http:localhost:8000/api/v1/products?filterItems=makeup&limit=20"
+  );
+  const products = await response.json();
+
+  const ids = products.products.map((product) => product._id);
+  const params = ids.map((id) => ({ params: { productId: id.toString() } }));
  
   return {
     paths: params,

@@ -20,95 +20,61 @@ const getSingleUser = asyncHandler(async(req, res) => {
 })
 
 
-const showCurrentUser = asyncHandler(async (req, res) => {
-  const user = await User.findOne({_id: req.user._id}).populate({path: "viewedProducts", select: "name image price"}).populate({path: "wishlist", select: "name price productNumber image isStocked"})
-  res.status(StatusCodes.OK).json({ user });
-});
+const showCurrentUser = asyncHandler(async(req, res) => {
+    console.log(req.signedCookies);
+    console.log(req.user)
+    res.status(StatusCodes.OK).json({user: req.user})
+})
 
-const updateUser = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email } = req.body;
 
-  const user = await User.findOne({ _id: req.user._id });
+const updateUser = asyncHandler(async(req, res) => {
+    const { firstName, lastName, email } = req.body 
 
-  user.email = email;
-  user.firstName = firstName;
-  user.lastName = lastName;
+    const user = await User.findOne({_id: req.user._id})
 
-  let savedUser = await user.save();
+    user.email = email
+    user.firstName = firstName
+    user.lastName = lastName
 
-  savedUser = savedUser._doc;
+    let savedUser = await user.save()
 
-  delete savedUser.password;
-  delete savedUser.resetPasswordToken;
-  delete savedUser.resetPasswordTokenExpiration;
+    savedUser = savedUser._doc 
 
-  const userToken = createUserToken(savedUser);
+    delete savedUser.password 
+    delete savedUser.resetPasswordToken
+    delete savedUser.resetPasswordTokenExpiration
 
-  attachAccessToken({ res, user: userToken });
+    const userToken = createUserToken(savedUser)
 
-  res.status(StatusCodes.OK).json({ user: savedUser });
-});
+    attachAccessToken({res, user: userToken})
 
-const updateViewedProducts = asyncHandler(async (req, res) => {
-  const {viewedProducts} = req.body;
+    res.status(StatusCodes.OK).json({user: savedUser})
+})
 
-  const user = await User.findByIdAndUpdate(
-    req.user._id,
-    { viewedProducts: [...viewedProducts] },
-    { new: true }
-  )
-    .populate({ path: "viewedProducts", select: "image, name, price" })
-    .populate({
-      path: "wishlist",
-      select: "name, productNumber, image, price, isStocked",
-    });
 
-    console.log(user)
+const updateUserPassword = asyncHandler(async(req, res) => {
 
-  res.status(StatusCodes.OK).json({ user });
-});
+    const { oldPassword, newPassword } = req.body
+    
+    const user = await User.findOne({_id: req.user._id})
 
-const updateWishlist = asyncHandler(async (req, res) => {
-  const [wishlist] = req.body;
+    const correctPassword = await user.comparePassword(oldPassword)
 
-  const user = await User.findByIdAndUpdate(
-    req.user._id,
-    { wishlist: [...wishlist] },
-    { new: true }
-  )
-    .populate({ path: "viewedProducts", select: "image name price" })
-    .populate({
-      path: "wishlist",
-      select: "name productNumber image price isStocked",
-    });
+    if(!correctPassword) {
+        throw new UnauthenticatedError("Invalid Credentials")
+    }
 
-  res.status(StatusCodes.OK).json({ user });
-});
+    user.password = newPassword
 
-const updateUserPassword = asyncHandler(async (req, res) => {
-  const { oldPassword, newPassword } = req.body;
+    await user.save()
 
-  const user = await User.findOne({ _id: req.user._id });
-
-  const correctPassword = await user.comparePassword(oldPassword);
-
-  if (!correctPassword) {
-    throw new UnauthenticatedError("Invalid Credentials");
-  }
-
-  user.password = newPassword;
-
-  await user.save();
-
-  res.status(StatusCodes.OK).json({ msg: "Success! Password Updated." });
-});
+    res.status(StatusCodes.OK).json({msg: "Success! Password Updated."})
+})
 
 module.exports = {
-  getAllUsers,
-  getSingleUser,
-  updateUserPassword,
-  updateUser,
-  showCurrentUser,
-  updateViewedProducts,
-  updateWishlist
-};
+    getAllUsers,
+    getSingleUser,
+    updateUserPassword,
+    updateUser,
+    showCurrentUser
+}

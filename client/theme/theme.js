@@ -63,11 +63,6 @@ const theme = {
         },
       },
     },
-    MuiModal: {
-      defaultProps: {
-        container: () => document.getElementById("__next")
-      }
-    }
   },
 };
 

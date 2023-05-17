@@ -6,15 +6,12 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
-  updateProductViewCount,
 } = require("../controllers");
 const {
   validateCreateProduct,
   validateUpdateProduct,
-  validateUpdateProductViewCount,
   validateParams,
-  authenticateUser,
-  authorizePermissions,
+  authenticateUser
 } = require("../middlewares");
 const storage = multer.memoryStorage();
 
@@ -33,11 +30,8 @@ router
       { name: "imageGallery", maxCount: 5 },
     ]),
     validateCreateProduct,
-    authenticateUser,
-    authorizePermissions("admin, manager"),
     createProduct
   );
-router.route("/updateViewCount").patch(validateUpdateProductViewCount, updateProductViewCount)
 router
   .route("/:id")
   .get(validateParams, getSingleProduct)
@@ -47,16 +41,9 @@ router
       { name: "imageGallery", maxCount: 5 },
     ]),
     validateParams,
-    authenticateUser,
-    authorizePermissions("admin, manager"),
     validateUpdateProduct,
     updateProduct
   )
-  .delete(
-    validateParams,
-    authenticateUser,
-    authorizePermissions("admin, manager"),
-    deleteProduct
-  );
+  .delete(validateParams, deleteProduct);
 
 module.exports = router;
