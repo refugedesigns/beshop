@@ -53,7 +53,6 @@ const SignupForm = () => {
         initialValues={initialsValues}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          console.log(values);
           setSubmitting(false);
           signup(values)
         }}

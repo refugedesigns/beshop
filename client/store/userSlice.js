@@ -56,7 +56,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["User"],
       async onQueryStarted(args, { dispatch, getState, queryFulfilled }) {
-        console.log(args);
         try {
           const data = await queryFulfilled;
         } catch (error) {
@@ -72,7 +71,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["User"],
       async onQueryStarted(args, { dispatch, getState, queryFulfilled }) {
-        console.log(args);
         try {
           const data = await queryFulfilled;
           dispatch(addUser(data.data.user));

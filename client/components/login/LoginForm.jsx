@@ -36,7 +36,6 @@ const LoginForm = () => {
   }
   if(isSuccess) {
     if(router.query.redirect) {
-      console.log(router.query)
      router.replace(`/${router.query.redirect}`)
     }else {
       router.replace("/shop")
@@ -51,7 +50,6 @@ const LoginForm = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        console.log(values);
         setSubmitting(false);
         signin(values)
       }}
