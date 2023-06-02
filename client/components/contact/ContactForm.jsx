@@ -14,10 +14,11 @@ const ContactForm = () => {
         placeholder="Enter your name"
         fullWidth
         sx={{
-          "& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
-            backgroundColor: "white",
-            borderRadius: 0,
-            zIndex: 40,
+          border: "none",
+          backgroundColor: "white",
+          borderRadius: 0,
+          "& fieldset": {
+            border: "none",
           },
         }}
       />
@@ -30,10 +31,11 @@ const ContactForm = () => {
         fullWidth
         placeholder="Enter your email"
         sx={{
-          "& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
-            backgroundColor: "white",
-            borderRadius: 0,
-            zIndex: 40,
+          border: "none",
+          backgroundColor: "white",
+          borderRadius: 0,
+          "& fieldset": {
+            border: "none",
           },
         }}
       />
@@ -41,20 +43,20 @@ const ContactForm = () => {
         id="message"
         label=""
         type="text"
-        variant='outlined'
+        variant="outlined"
         className="sm:flex-1 border-none hover:outline-none"
         placeholder="Enter your message"
         multiline
         fullWidth
         minRows={8}
-        inputProps={{disableUnderline: true}}
+        inputProps={{ disableUnderline: true }}
         sx={{
           border: "none",
           backgroundColor: "white",
           borderRadius: 0,
           "& fieldset": {
             border: "none",
-          }
+          },
         }}
       />
       <Button title="Send" classes="bg-gray-800" />

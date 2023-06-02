@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react'
 
-import { Box } from '@mui/material'
 import Banner from '@/components/ui/banner/Banner'
 import AllQuestions from '@/components/faq/AllQuestions'
 import SubscribeCard from '@/components/ui/subscribe/SubscribeCard'
