@@ -127,13 +127,11 @@ const ShopPage = () => {
   };
 
   useEffect(() => {
-    console.log(queryFilter);
     window.scrollTo({ top: 100, behavior: "smooth" });
     if(isFirstRender) {
       setIsFirstRender(false)
     }
     if (router.query.categoryId && isFirstRender) {
-      console.log(isFirstRender)
       const newFilter = {
         ...queryFilter,
         filterItems: router.query.categoryId,
@@ -164,7 +162,6 @@ const ShopPage = () => {
             page: 1,
           };
         }
-        console.log(newFilter);
         return newFilter;
       });
     }
@@ -172,7 +169,7 @@ const ShopPage = () => {
   return (
     <Fragment>
       <NextHead title="GoShop - Shop Page" description="This is the main shop page" />
-      <WishlistModal />
+      <WishlistModal open={openModal} setOpenModal={setOpenModal}/>
       <Banner
         pageTitle="Shop"
         breadcrumbs={[{ link: "/", title: "Home" }, { title: "Shop" }]}

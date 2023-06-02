@@ -15,7 +15,7 @@ const Location = () => {
           width: "100%",
           height: "100%",
         }}
-        mapboxAccessToken={process.env.NEXT_PUBLIC_MAP_BOX_KEY}
+        mapboxAccessToken={process.env.MAP_BOX_KEY}
         initialViewState={{
           longitude: viewState.lng,
           latitude: viewState.lat,

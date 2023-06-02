@@ -9,6 +9,7 @@ const nextConfig = {
   },
   env: {
     STRIPE_PUBLIC_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY,
+    MAP_BOX_KEY: process.env.NEXT_PUBLIC_MAP_BOX_KEY,
   },
 };
 

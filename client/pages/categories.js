@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react'
 
-import { Box, Grid } from "@mui/material";
-import Layout from "@/components/layout/Layout";
+import { Grid } from "@mui/material";
 import Banner from "@/components/ui/banner/Banner";
 import categories from "@/data/category/category";
 import CategoryCard from "@/components/ui/category-item/CategoryCard";

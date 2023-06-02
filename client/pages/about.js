@@ -13,6 +13,7 @@ import TestimonialSection from "@/components/ui/testimonails/TestimonialSection"
 import SubscribeCard from "@/components/ui/subscribe/SubscribeCard";
 import InstaPhotos from "@/components/ui/insta-photos/InstaPhotos";
 import PageDecor from "@/components/ui/page-decor/PageDecor";
+import NextHead from "@/components/ui/Head/Head";
 
 const AboutPage = () => {
   const router = useRouter()
